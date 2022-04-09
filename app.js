@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const startBtn = document.querySelector("#start-button");
 
   const width = 10;
+  console.log(squares);
 
   //The Tetrominoes
   const lTetromino = [
@@ -22,14 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const tTetromino = [
-    [1, width, width + 1, width + 2],
-    [1, width + 1, width + 2, width * 2 + 1],
-    [width, width + 1, width + 2, width * 2 + 1],
-    [1, width, width + 1, width * 2 + 1],
+    [1, width, width + 1, width + 2], //1, 10, 11, 12
+    [1, width + 1, width + 2, width * 2 + 1], //1, 11, 12, 21
+    [width, width + 1, width + 2, width * 2 + 1], //10, 11, 12, 21
+    [1, width, width + 1, width * 2 + 1], //1, 10, 11, 21
   ];
 
   const oTetromino = [
-    [0, 1, width, width + 1],
+    [0, 1, width, width + 1], //0, 1, 10, 11
     [0, 1, width, width + 1],
     [0, 1, width, width + 1],
     [0, 1, width, width + 1],
@@ -51,12 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let currentPosition = 4;
-  let currentRotation = 0;
-
-  //randomly select a Tetromino and its first rotation
-  let random = Math.floor(Math.random() * theTetrominoes.length);
-  console.log(random);
-  let current = theTetrominoes[0];
+  let current = theTetrominoes[0][0];
+  console.log(theTetrominoes);
 
   //draw the Tetromino
   function draw() {
@@ -65,9 +62,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function undraw() {
-    current.forEach((index) => {
-      squares[currentPosition + index].classList.remove("tetromino");
-    });
-  }
+  draw();
 });
+//   let currentRotation = 0;
+
+//   //randomly select a Tetromino and its first rotation
+//   let random = Math.floor(Math.random() * theTetrominoes.length);
+//   console.log(random);
+//   let current = theTetrominoes[0];
+
+//   function undraw() {
+//     current.forEach((index) => {
+//       squares[currentPosition + index].classList.remove("tetromino");
+//     });
+//   }
+// });
