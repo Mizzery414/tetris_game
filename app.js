@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let squares = Array.from(document.querySelectorAll(".grid div"));
   const scoreDisplay = document.querySelector("#score");
   const startBtn = document.querySelector("#start-button");
+  let nextRandom = 0;
 
   const width = 10;
   console.log(squares);
@@ -37,8 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const iTetromino = [
-    [1, width + 1, width * 2 + 1, width * 3 + 1],
-    [width, width + 1, width + 2, width + 3],
+    [1, width + 1, width * 2 + 1, width * 3 + 1], //1, 11, 21, 31
+    [width, width + 1, width + 2, width + 3], //10. 11, 12, 13
     [1, width + 1, width * 2 + 1, width * 3 + 1],
     [width, width + 1, width + 2, width + 3],
   ];
@@ -108,10 +109,12 @@ document.addEventListener("DOMContentLoaded", () => {
         squares[currentPosition + index].classList.add("taken")
       );
       //start new tetromino falling
-      random = Math.floor(Math.random() * theTetrominoes.length);
+      random = nextRandom;
+      nextRandom = Math.floor(Math.random() * theTetrominoes.length);
       current = theTetrominoes[random][currentRotation];
       currentPosition = 4;
       draw();
+      displayShape();
     }
   }
 
@@ -161,5 +164,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     current = theTetrominoes[random][currentRotation];
     draw();
+  }
+
+  //show up-next tetromino in mini-grid
+  const displaySquares = document.querySelectorAll(".mini-grid div");
+  const displayWidth = 4;
+  let displayIndex = 0;
+
+  //the Tetrominoes without rotations
+  const upNextTetromino = [
+    [1, displayWidth + 1, displayWidth * 2 + 1, 2], //lTetromino
+    [0, displayWidth, displayWidth + 1, displayWidth * 2 + 1], //zTetromino
+    [1, displayWidth, displayWidth + 1, displayWidth + 2], //tTetromino
+    [0, 1, displayWidth, displayWidth + 1], //oTetromino
+    [1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1], //iTetromino
+  ];
+
+  //display the shape in the mini-grid display
+  function displayShape() {
+    //remove any trace of tetromino from entire grid
+    displaySquares.forEach((square) => {
+      square.classList.remove("tetromino");
+    });
+    upNextTetromino[nextRandom].forEach((index) => {
+      displaySquares[displayIndex + index].classList.add("tetromino");
+    });
   }
 });
