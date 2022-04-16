@@ -3,7 +3,7 @@
 }
 
 .grid {
-  background-color: yellow;
+  background-color: #00beef;
   display: flex;
   flex-wrap: wrap;
   height: 400px;
@@ -16,7 +16,7 @@
 }
 
 .tetromino {
-  background-color: blue;
+  background-color: red;
 }
 
 .mini-grid {
@@ -25,10 +25,16 @@
   height: 80px;
   display: flex;
   flex-wrap: wrap;
-  background-color: yellow;
+  background-color: #00beef;
 }
 
 .mini-grid div {
   height: 20px;
   width: 20px;
+}
+
+#start-button {
+  padding: 3px;
+  margin: 3px;
+  border-radius: 20px;
 }
